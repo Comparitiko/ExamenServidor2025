@@ -1,0 +1,38 @@
+services:
+  # Nginx
+  web:
+    container_name: nginx
+    image: nginx:1.27.1
+    restart: on-failure
+    ports:
+      - "8081:80"
+    volumes:
+      - ./src:/var/www/
+      - ./nginx/default.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - php-fpm
+
+  # Configuración de php
+  php-fpm:
+    container_name: php-fpm
+    build: .
+    restart: on-failure
+    volumes:
+      - ./src:/var/www/html
+    depends_on:
+      - mariadb
+
+  # MariaDB
+  mariadb:
+    container_name: mariadb_examen
+    image: mariadb:lts-noble
+    restart: on-failure
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${MARIADB_DATABASE}
+      MARIADB_USER: ${MARIADB_USER}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD}
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./mariadb:/var/lib/mysql
