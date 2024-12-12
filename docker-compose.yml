@@ -1,7 +1,7 @@
 services:
   # Nginx
   web:
-    container_name: nginx
+    container_name: nginx-examen
     image: nginx:1.27.1
     restart: on-failure
     ports:
@@ -14,7 +14,7 @@ services:
 
   # Configuración de php
   php-fpm:
-    container_name: php-fpm
+    container_name: php-fpm-examen
     build: .
     restart: on-failure
     volumes:
