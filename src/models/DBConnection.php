@@ -1,6 +1,6 @@
 <?php
 
-namespace \models;
+namespace App\models;
 
 use \PDO;
 use \PDOException;
@@ -15,7 +15,7 @@ class DBConnection
 
     try {
 
-      $this->conn = new PDO("mysql:host=$host;dbname=gabrieldb", "root", "mysql?");
+      $this->conn = new PDO("mysql:host=$host;dbname=examen", "root", "mysql?");
       $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $this->conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 
